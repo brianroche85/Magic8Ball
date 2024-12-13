@@ -1,11 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Magic 8 ball</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            width: 1140px;
+            margin: auto;
+            padding-top: 48px;
+        }
+
+        body {
+            background: rgb(238, 174, 202);
+            background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+        }
+
+        .outer {
+            background: hsl(0, 0%, 11%);
+            background: radial-gradient(circle, rgba(29, 29, 29, 1) 0%, rgba(36, 53, 57, 1) 100%);
+            border-radius: 50%;
+            height: 400px;
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .inner {
+            background: #fff;
+            border-radius: 50%;
+            height: 200px;
+            width: 200px;           
+        }
+
+
+        #result {
+            color: #000;
+            justify-content: center;           
+            display: flex;
+            text-align: center;
+            font-family: "Lato", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            width: 200px;
+        }
+
+        .big {
+            font-size: 64px;
+            padding-top: 64px;
+        }
+
+        .small {
+            font-size: 24px;
+            padding-top: 80px;
+        }
+
+        h1 {
+            font-family: "Lato", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 48px;
+        }
+
+        p {
+            font-family: "Lato", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+            font-size: 24px;
+        }
+
+        button {
+            border-radius: 24px;
+            border: 0;
+            padding: 12px 24px;
+            font-size: 22px;
+            cursor: pointer;
+            background: #203573;
+            color: #fff;
+        }
+
+        button:hover {
+            background: #000756;
+        }
+
+
+
+        /* css animations */
+
+        @keyframes fade {
+            0% {
+                opacity: 0.1;
+            } 
+
+            25% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 0.5
+            } 
+
+            75% {
+                opacity: 07
+            }
+
+            100% {
+                opacity: 1
+            }
+        }       
+
+        @keyframes horizontal-shaking {
+            0% {
+                transform: translateX(0)
+            }
+
+            25% {
+                transform: translateX(5px)
+            }
+
+            50% {
+                transform: translateX(-5px)
+            }
+
+            75% {
+                transform: translateX(5px)
+            }
+
+            100% {
+                transform: translateX(0)
+            }
+        }
+    </style>
 </head>
+
 <body>
-    
+
+    <div class="container">
+        <div id="outer" class="outer">
+            <div class="inner">
+                <div id="result" class="big">8</div>
+            </div>
+        </div>
+        <div class="message">
+            <h1>Magic 8-Ball</h1>
+            <p>Ask a question and click the button!</p>
+            <button onClick="myFunc()">Ask away</button>
+        </div>
+    </div>
+
+
+    <script>
+        const responses = ["It is decidedly so", "Without a doubt", "Yes definitely", "You may rely on it", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again", "My reply is no", "My sources say no", "Outlook not so good", "Very doubtful"]
+
+        function myFunc() {
+            let i = Math.floor(Math.random() * responses.length);
+            let result = responses[i];
+
+            let element = document.getElementById("result"); 
+            element.classList.add("small");
+
+            document.getElementById('outer').style.animation = "horizontal-shaking 0.5s linear";
+
+            document.getElementById("result").innerHTML = result;
+            document.getElementById('result').style.animation = "fade 1s linear";
+
+            const myReset = setTimeout(reset, 1000);
+
+            function reset() {
+                document.getElementById('outer').style.animation = "";
+                document.getElementById('result').style.animation = "";
+            }
+        }
+    </script>
 </body>
+
 </html>
